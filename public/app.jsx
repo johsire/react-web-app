@@ -1,3 +1,4 @@
+// Presentational Component - don't maintain state
 const GreeterMessage = React.createClass({
   render: function() {
     return (
@@ -9,11 +10,23 @@ const GreeterMessage = React.createClass({
   }
 });
 
+// Presentational Component- don't maintain state
 const GreeterForm = React.createClass({
+ onFormSubmit: function (e) {
+  e.preventDefault();
+
+  let name = this.refs.name.value;
+
+  if (name.length > 0) {
+   this.refs.name.value = "";
+
+  }
+ },
+
   render: function() {
     return (
       <div>
-        <form onSubmit={this.onButtonClick}>
+        <form onSubmit={this.onFormSubmit}>
           <input type="text" ref="name" />
           <button>Enter Name</button>
         </form>
@@ -22,6 +35,7 @@ const GreeterForm = React.createClass({
   }
 });
 
+// Container Component- maintain state and render children components
 const Greeter = React.createClass({
   getDefaultProps: function() {
     return {
@@ -36,14 +50,7 @@ const Greeter = React.createClass({
     };
   },
 
-  onButtonClick: function(e) {
-    e.preventDefault();
-
-    let nameRef = this.refs.name;
-    let name = nameRef.value;
-    nameRef.value = "";
-
-    if (typeof name === "string" && name.length > 0) {
+  handleNewName: function(name) {
       this.setState({
         name: name
       });
