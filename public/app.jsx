@@ -26,14 +26,40 @@ const GreeterForm = React.createClass({
       this.refs.name.value = "";
       this.props.onNewName(name);
     }
+
+    let message = this.refs.message.value;
+
+    if (message.length > 0) {
+      this.refs.message.value = "";
+      this.props.onNewMessage(message);
+    }
+  },
+
+  getInitialState: function() {
+    return {
+      message: this.props.message,
+      name: this.props.name
+    };
   },
 
   render: function() {
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
-          <input type="text" ref="name" />
-          <button>Enter Name</button>
+         <input
+          type="text"
+          ref="name"
+          placeholder="Enter Name Here"
+       />
+          <br />
+          <textarea
+            ref="message"
+            placeholder="Enter Message Here"
+            cols="30"
+            rows="10"
+          />
+          <br />
+          <button>Submit</button>
         </form>
       </div>
     );
@@ -53,6 +79,7 @@ const Greeter = React.createClass({
   getInitialState: function() {
     return {
       name: this.props.name,
+      message: this.props.message
     };
   },
 
@@ -62,14 +89,26 @@ const Greeter = React.createClass({
     });
   },
 
+  handleNewMessage: function(message) {
+    this.setState({
+      message: message
+    });
+  },
+
   render: function() {
     let name = this.state.name;
-    let message = this.props.message;
+    let message = this.state.message;
 
     return (
       <div>
-        <GreeterMessage name={name} message={message} />
-        <GreeterForm onNewName={this.handleNewName} />
+      <GreeterMessage
+         name={name}
+         message={message}
+       />
+        <GreeterForm
+          onNewName={this.handleNewName}
+          onNewMessage={this.handleNewMessage}
+        />
       </div>
     );
   }
@@ -77,7 +116,4 @@ const Greeter = React.createClass({
 
 let firstName = "Coder Joh";
 
-ReactDOM.render(
-  <Greeter name={firstName} />,
-  document.getElementById("app")
-);
+ReactDOM.render(<Greeter name={firstName} />, document.getElementById("app"));
