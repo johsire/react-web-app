@@ -1,27 +1,32 @@
-// Presentational Component - don't maintain state
+// Presentational Component - don't maintain state -
+// take props from parent, & render s'thing to the screen
 const GreeterMessage = React.createClass({
   render: function() {
+    let name = this.props.name;
+    let message = this.props.message;
+
     return (
       <div>
-        <h1>Some H1</h1>
-        <p>Some paragraph</p>
+        <h1>Hello {name}!</h1>
+        <p>{message}!</p>
       </div>
     );
   }
 });
 
-// Presentational Component- don't maintain state
+// Presentational Component - don't maintain state -
+// take props from parent, & render s'thing to the screen
 const GreeterForm = React.createClass({
- onFormSubmit: function (e) {
-  e.preventDefault();
+  onFormSubmit: function(e) {
+    e.preventDefault();
 
-  let name = this.refs.name.value;
+    let name = this.refs.name.value;
 
-  if (name.length > 0) {
-   this.refs.name.value = "";
-
-  }
- },
+    if (name.length > 0) {
+      this.refs.name.value = "";
+      this.props.onNewName(name);
+    }
+  },
 
   render: function() {
     return (
@@ -35,7 +40,8 @@ const GreeterForm = React.createClass({
   }
 });
 
-// Container Component- maintain state and render children components
+// Container Component- maintain state and
+// render children components
 const Greeter = React.createClass({
   getDefaultProps: function() {
     return {
@@ -46,15 +52,14 @@ const Greeter = React.createClass({
 
   getInitialState: function() {
     return {
-      name: this.props.name
+      name: this.props.name,
     };
   },
 
   handleNewName: function(name) {
-      this.setState({
-        name: name
-      });
-    }
+    this.setState({
+      name: name
+    });
   },
 
   render: function() {
@@ -63,26 +68,16 @@ const Greeter = React.createClass({
 
     return (
       <div>
-        <h1>Hello {name}!</h1>
-        <p>{message + "!!"}</p>
-
-        <GreeterMessage />
-
-        <form onSubmit={this.onButtonClick}>
-          <input type="text" ref="name" />
-          <button>Set Name</button>
-        </form>
-
-        <GreeterForm />
+        <GreeterMessage name={name} message={message} />
+        <GreeterForm onNewName={this.handleNewName} />
       </div>
     );
   }
 });
 
 let firstName = "Coder Joh";
-let msg = "This message is from the Greeter component";
 
 ReactDOM.render(
-  <Greeter name={firstName} message={msg} />,
+  <Greeter name={firstName} />,
   document.getElementById("app")
 );
