@@ -1,14 +1,28 @@
 const Greeter = React.createClass({
+  getDefaultProps: function() {
+    return {
+      name: "React",
+      message: "Default message from the component"
+    };
+  },
+
   render: function() {
+    let name = this.props.name;
+    let message = this.props.message;
+
     return (
       <div>
-        <h1>Hello React!</h1>
-        <p>This is from the Greeter component.</p>
+        <h1>Hello {name}!</h1>
+        <p>{message + "!!"}</p>
       </div>
     );
   }
 });
 
+let firstName = "Coder Joh";
+let msg = "This message is from the Greeter component";
+
 ReactDOM.render(
- <Greeter />,
-document.getElementById("app"));
+  <Greeter name={firstName} message={msg} />,
+  document.getElementById("app")
+);
