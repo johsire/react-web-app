@@ -9,6 +9,19 @@ const GreeterMessage = React.createClass({
   }
 });
 
+const GreeterForm = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <form onSubmit={this.onButtonClick}>
+          <input type="text" ref="name" />
+          <button>Enter Name</button>
+        </form>
+      </div>
+    );
+  }
+});
+
 const Greeter = React.createClass({
   getDefaultProps: function() {
     return {
@@ -52,6 +65,8 @@ const Greeter = React.createClass({
           <input type="text" ref="name" />
           <button>Set Name</button>
         </form>
+
+        <GreeterForm />
       </div>
     );
   }
