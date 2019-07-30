@@ -6,6 +6,14 @@ const Greeter = React.createClass({
     };
   },
 
+  onButtonClick: function(e) {
+    e.preventDefault();
+
+    let name = this.refs.name.value;
+
+    alert(name);
+  },
+
   render: function() {
     let name = this.props.name;
     let message = this.props.message;
@@ -14,6 +22,11 @@ const Greeter = React.createClass({
       <div>
         <h1>Hello {name}!</h1>
         <p>{message + "!!"}</p>
+
+        <form onSubmit={this.onButtonClick}>
+          <input type="text" ref="name" />
+          <button>Set Name</button>
+        </form>
       </div>
     );
   }
