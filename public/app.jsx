@@ -1,3 +1,7 @@
+const React = require("react");
+
+const ReactDOM = require("react-dom");
+
 // Presentational Component - don't maintain state -
 // take props from parent, & render s'thing to the screen
 const GreeterMessage = React.createClass({
@@ -95,13 +99,8 @@ const Greeter = React.createClass({
 
     return (
       <div>
-        <GreeterMessage
-          name={name}
-          message={message}
-        />
-        <GreeterForm
-          onNewData={this.handleNewData}
-        />
+        <GreeterMessage name={name} message={message} />
+        <GreeterForm onNewData={this.handleNewData} />
       </div>
     );
   }
