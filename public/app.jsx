@@ -1,22 +1,7 @@
 const React = require("react");
-
 const ReactDOM = require("react-dom");
 
-// Presentational Component - don't maintain state -
-// take props from parent, & render s'thing to the screen
-const GreeterMessage = React.createClass({
-  render: function() {
-    let name = this.props.name;
-    let message = this.props.message;
-
-    return (
-      <div>
-        <h1>Hello {name}!</h1>
-        <p>{message}!</p>
-      </div>
-    );
-  }
-});
+const GreeterMessage = require("./components/GreeterMessage");
 
 // Presentational Component - don't maintain state -
 // take props from parent, & render s'thing to the screen
@@ -24,7 +9,7 @@ const GreeterForm = React.createClass({
   onFormSubmit: function(e) {
     e.preventDefault();
 
-    let updates = {};
+    const updates = {};
     let name = this.refs.name.value;
     let message = this.refs.message.value;
 
@@ -37,35 +22,28 @@ const GreeterForm = React.createClass({
       this.refs.message.value = "";
       updates.message = message;
     }
+
     this.props.onNewData(updates);
   },
 
   render: function() {
     return (
-      <div>
         <form onSubmit={this.onFormSubmit}>
-          <div>
             <input
               type="text"
               ref="name"
               placeholder="Enter Name"
             />
-          </div>
           <br />
-          <div>
             <textarea
               ref="message"
               placeholder="Enter Message"
               cols="30"
               rows="10"
             />
-          </div>
           <br />
-          <div>
             <button>Submit</button>
-          </div>
         </form>
-      </div>
     );
   }
 });
