@@ -9,7 +9,7 @@ const GreeterForm = React.createClass({
   onFormSubmit: function(e) {
     e.preventDefault();
 
-    const updates = {};
+    let updates = {};
     let name = this.refs.name.value;
     let message = this.refs.message.value;
 
@@ -28,22 +28,20 @@ const GreeterForm = React.createClass({
 
   render: function() {
     return (
-        <form onSubmit={this.onFormSubmit}>
-            <input
-              type="text"
-              ref="name"
-              placeholder="Enter Name"
-            />
-          <br />
-            <textarea
-              ref="message"
-              placeholder="Enter Message"
-              cols="30"
-              rows="10"
-            />
-          <br />
-            <button>Submit</button>
-        </form>
+      <form onSubmit={this.onFormSubmit}>
+        <div>
+          <input type="text" ref="name" placeholder="Enter Name" />
+        </div>
+        <div>
+          <textarea
+            ref="message"
+            placeholder="Enter Message"
+          />
+        </div>
+        <div>
+          <button>Submit</button>
+        </div>
+      </form>
     );
   }
 });
@@ -54,7 +52,7 @@ const Greeter = React.createClass({
   getDefaultProps: function() {
     return {
       name: "React",
-      message: "Default message from the component"
+      message: "This is the default message!"
     };
   },
 
@@ -66,9 +64,7 @@ const Greeter = React.createClass({
   },
 
   handleNewData: function(updates) {
-    this.setState({
-      name: name
-    });
+    this.setState(updates);
   },
 
   render: function() {
@@ -86,6 +82,4 @@ const Greeter = React.createClass({
 
 let firstName = "Coder Joh";
 
-ReactDOM.render(
-  <Greeter name={firstName} />,
-document.getElementById("app"));
+ReactDOM.render(<Greeter name={firstName} />, document.getElementById("app"));

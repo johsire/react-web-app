@@ -1,4 +1,5 @@
 const React = require("react");
+const ReactDOM = require("react-dom");
 
 // Presentational Component - don't maintain state -
 // take props from parent, & render s'thing to the screen

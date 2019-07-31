@@ -72,45 +72,34 @@
 	      this.refs.message.value = "";
 	      updates.message = message;
 	    }
+
 	    this.props.onNewData(updates);
 	  },
 
 	  render: function render() {
 	    return React.createElement(
-	      "div",
-	      null,
+	      "form",
+	      { onSubmit: this.onFormSubmit },
 	      React.createElement(
-	        "form",
-	        { onSubmit: this.onFormSubmit },
+	        "div",
+	        null,
+	        React.createElement("input", { type: "text", ref: "name", placeholder: "Enter Name" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement("textarea", {
+	          ref: "message",
+	          placeholder: "Enter Message"
+	        })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
 	        React.createElement(
-	          "div",
+	          "button",
 	          null,
-	          React.createElement("input", {
-	            type: "text",
-	            ref: "name",
-	            placeholder: "Enter Name"
-	          })
-	        ),
-	        React.createElement("br", null),
-	        React.createElement(
-	          "div",
-	          null,
-	          React.createElement("textarea", {
-	            ref: "message",
-	            placeholder: "Enter Message",
-	            cols: "30",
-	            rows: "10"
-	          })
-	        ),
-	        React.createElement("br", null),
-	        React.createElement(
-	          "div",
-	          null,
-	          React.createElement(
-	            "button",
-	            null,
-	            "Submit"
-	          )
+	          "Submit"
 	        )
 	      )
 	    );
@@ -125,7 +114,7 @@
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      name: "React",
-	      message: "Default message from the component"
+	      message: "This is the default message!"
 	    };
 	  },
 
@@ -137,9 +126,7 @@
 	  },
 
 	  handleNewData: function handleNewData(updates) {
-	    this.setState({
-	      name: name
-	    });
+	    this.setState(updates);
 	  },
 
 	  render: function render() {
@@ -19860,6 +19847,7 @@
 	"use strict";
 
 	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(158);
 
 	// Presentational Component - don't maintain state -
 	// take props from parent, & render s'thing to the screen
