@@ -1,7 +1,7 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 
-const Greeter = require("./components/Greeter");
+const Greeter = require("Greeter");
 
 let firstName = "Coder Joh";
 
