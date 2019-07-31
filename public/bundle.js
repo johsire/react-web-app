@@ -50,61 +50,7 @@
 	var ReactDOM = __webpack_require__(158);
 
 	var GreeterMessage = __webpack_require__(159);
-
-	// Presentational Component - don't maintain state -
-	// take props from parent, & render s'thing to the screen
-	var GreeterForm = React.createClass({
-	  displayName: "GreeterForm",
-
-	  onFormSubmit: function onFormSubmit(e) {
-	    e.preventDefault();
-
-	    var updates = {};
-	    var name = this.refs.name.value;
-	    var message = this.refs.message.value;
-
-	    if (name.length > 0) {
-	      this.refs.name.value = "";
-	      updates.name = name;
-	    }
-
-	    if (message.length > 0) {
-	      this.refs.message.value = "";
-	      updates.message = message;
-	    }
-
-	    this.props.onNewData(updates);
-	  },
-
-	  render: function render() {
-	    return React.createElement(
-	      "form",
-	      { onSubmit: this.onFormSubmit },
-	      React.createElement(
-	        "div",
-	        null,
-	        React.createElement("input", { type: "text", ref: "name", placeholder: "Enter Name" })
-	      ),
-	      React.createElement(
-	        "div",
-	        null,
-	        React.createElement("textarea", {
-	          ref: "message",
-	          placeholder: "Enter Message"
-	        })
-	      ),
-	      React.createElement(
-	        "div",
-	        null,
-	        React.createElement(
-	          "button",
-	          null,
-	          "Submit"
-	        )
-	      )
-	    );
-	  }
-	});
+	var GreeterForm = __webpack_require__(160);
 
 	// Container Component- maintain state and
 	// render children components
@@ -136,8 +82,11 @@
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement(GreeterMessage, { name: name, message: message }),
-	      React.createElement(GreeterForm, { onNewData: this.handleNewData })
+	      React.createElement(GreeterMessage, {
+	        name: name,
+	        message: message }),
+	      React.createElement(GreeterForm, {
+	        onNewData: this.handleNewData })
 	    );
 	  }
 	});
@@ -19847,7 +19796,6 @@
 	"use strict";
 
 	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
 
 	// Presentational Component - don't maintain state -
 	// take props from parent, & render s'thing to the screen
@@ -19879,6 +19827,75 @@
 	});
 
 	module.exports = GreeterMessage;
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	// Presentational Component - don't maintain state -
+	// take props from parent, & render s'thing to the screen
+	var GreeterForm = React.createClass({
+	  displayName: "GreeterForm",
+
+	  onFormSubmit: function onFormSubmit(e) {
+	    e.preventDefault();
+
+	    var updates = {};
+	    var name = this.refs.name.value;
+	    var message = this.refs.message.value;
+
+	    if (name.length > 0) {
+	      this.refs.name.value = "";
+	      updates.name = name;
+	    }
+
+	    if (message.length > 0) {
+	      this.refs.message.value = "";
+	      updates.message = message;
+	    }
+
+	    this.props.onNewData(updates);
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      "form",
+	      { onSubmit: this.onFormSubmit },
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement("input", {
+	          type: "text",
+	          ref: "name",
+	          placeholder: "Enter Name"
+	        })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement("textarea", {
+	          ref: "message",
+	          placeholder: "Enter Message"
+	        })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "button",
+	          null,
+	          "Submit"
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = GreeterForm;
 
 /***/ })
 /******/ ]);

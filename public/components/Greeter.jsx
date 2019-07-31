@@ -1,5 +1,7 @@
-function greeter() {
-  document.write("From greeter function");
-}
+const React = require("react");
 
-module.exports = greeter;
+// function greeter() {
+//   document.write("From greeter function");
+// }
+
+module.exports = Greeter;
